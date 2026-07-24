@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* ============================================================
+   نظام الألوان والخطوط — مستوحى من كسوة الكعبة:
+   أسود عميق + ذهبي التطريز
+   ============================================================ */
+@theme {
+  --font-body: "Almarai", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Amiri", serif;
+
+  --color-ink: #09090b;          /* الخلفية: أسود الكسوة */
+  --color-panel: #131114;        /* خلفية البطاقات */
+  --color-line: #27232a;         /* الحدود الرفيعة */
+  --color-gold: #d6a94f;         /* ذهبي التطريز */
+  --color-gold-bright: #eec272;  /* ذهبي مضيء للتحويم */
+  --color-sand: #b3aa9c;         /* رمادي دافئ للنصوص */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink font-body text-sand antialiased;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: #09090b;
+}
+
+/* شريط تمرير رفيع داكن */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3a3540 transparent;
+}
+*::-webkit-scrollbar {
+  height: 6px;
+  width: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #3a3540;
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* إخفاء شريط التمرير في شرائح المعرض الأفقية دون تعطيل التمرير نفسه */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Edge القديم */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome / Safari */
+}
+
+/* حماية بسيطة للصور والفيديوهات: تمنع القائمة اليمنى للحفظ،
+   السحب لسطح المكتب، وقائمة "حفظ الصورة" عند الضغط المطوّل على الجوال.
+   ملاحظة: هذه إجراءات رادعة فقط ولا تمنع لقطة الشاشة نهائيًا. */
+.protect-media {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+}
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
